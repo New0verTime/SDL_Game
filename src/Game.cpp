@@ -1,5 +1,8 @@
 #include "Game.h"
+#include "TextureManager.h"
 #include<iostream>
+int m_currentFrame;
+TextureManager m_textureManager;
 Game::Game(){
  m_pWindow=NULL;
  m_pRenderer=NULL;
@@ -20,9 +23,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
  if(m_pRenderer != 0) // renderer init success
  {
  std::cout << "renderer creation success\n";
- SDL_SetRenderDrawColor(m_pRenderer,
- 255,255,255,255);
- }
+ SDL_SetRenderDrawColor(m_pRenderer,255,255,255,255);}
  else
  {
  std::cout << "renderer init fail\n";
@@ -41,13 +42,16 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
  return false; // SDL init fail
  }
  std::cout << "init success\n";
- m_bRunning = true; // everything inited successfully,
+ m_bRunning = true;
+ m_textureManager.load("assets/animate.png", "animate", m_pRenderer);
  return true;
 }
 void Game::render()
 {
- SDL_RenderClear(m_pRenderer); // clear the renderer to
- SDL_RenderPresent(m_pRenderer); // draw to the screen
+ SDL_RenderClear(m_pRenderer);
+ m_textureManager.draw("animate", 0,0, 128, 82, m_pRenderer);
+ m_textureManager.drawFrame("animate", 100,100, 128, 82, 1, m_currentFrame, m_pRenderer);
+ SDL_RenderPresent(m_pRenderer);
 }
 void Game::handleEvents()
 {
@@ -70,4 +74,8 @@ void Game::clean()
  SDL_DestroyWindow(m_pWindow);
  SDL_DestroyRenderer(m_pRenderer);
  SDL_Quit();
+}
+void Game::update()
+{
+ m_currentFrame = int(((SDL_GetTicks() / 1000) % 3));
 }

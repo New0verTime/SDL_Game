@@ -1,12 +1,23 @@
 # depslib dependency file v1.0
-1676745486 source:c:\users\quan\desktop\sdl_game\main.cpp
+1676759413 source:c:\users\quan\desktop\sdl_game\main.cpp
 	<SDL.h>
 	"Game.h"
 
-1676745444 c:\users\quan\desktop\sdl_game\include\game.h
+1676759080 c:\users\quan\desktop\sdl_game\include\game.h
 	"SDL.h"
 
-1676745580 source:c:\users\quan\desktop\sdl_game\src\game.cpp
+1676759413 source:c:\users\quan\desktop\sdl_game\src\game.cpp
 	"Game.h"
+	"TextureManager.h"
 	<iostream>
+
+1676759389 source:c:\users\quan\desktop\sdl_game\src\texturemanager.cpp
+	"TextureManager.h"
+	<SDL_image.h>
+	<string>
+
+1676758877 c:\users\quan\desktop\sdl_game\include\texturemanager.h
+	<string>
+	<SDL.h>
+	<map>
 

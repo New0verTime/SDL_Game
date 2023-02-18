@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1676745486 source:c:\users\quan\desktop\sdl_game\main.cpp
+	<SDL.h>
+	"Game.h"
+
+1676745444 c:\users\quan\desktop\sdl_game\include\game.h
+	"SDL.h"
+
+1676745580 source:c:\users\quan\desktop\sdl_game\src\game.cpp
+	"Game.h"
+	<iostream>
+

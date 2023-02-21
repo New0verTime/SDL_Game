@@ -47,9 +47,11 @@
 		<ExtraCommands>
 			<Add after="XCOPY $(#sdl2)\bin\*.dll $(TARGET_OUTPUT_DIR) /D /Y" />
 		</ExtraCommands>
+		<Unit filename="include/Abc.h" />
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/TextureManager.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Abc.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/TextureManager.cpp" />
 		<Extensions>

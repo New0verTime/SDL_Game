@@ -21,3 +21,35 @@
 	<SDL.h>
 	<map>
 
+1676982555 source:c:\users\quan\documents\github\sdl_game\main.cpp
+	<SDL.h>
+	"Game.h"
+
+1676987826 c:\users\quan\documents\github\sdl_game\include\game.h
+	"SDL.h"
+	"SDL_ttf.h"
+	<string>
+	<vector>
+
+1676988086 source:c:\users\quan\documents\github\sdl_game\src\game.cpp
+	"Game.h"
+	"TextureManager.h"
+	<SDL_ttf.h>
+	<iostream>
+	<cstdlib>
+
+1676951101 c:\users\quan\documents\github\sdl_game\include\texturemanager.h
+	<string>
+	<SDL.h>
+	<map>
+
+1676950984 source:c:\users\quan\documents\github\sdl_game\src\texturemanager.cpp
+	"TextureManager.h"
+	<SDL_image.h>
+	<string>
+
+1676980833 source:c:\users\quan\documents\github\sdl_game\src\abc.cpp
+	"Abc.h"
+
+1676980833 c:\users\quan\documents\github\sdl_game\include\abc.h
+

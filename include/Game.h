@@ -18,6 +18,7 @@ public:
  bool running() { return m_bRunning; }
 private:
  const int block_size=75;
+ double angle=0;
  int score=0;
  int Delay,Mark=0;
  int frame=0;

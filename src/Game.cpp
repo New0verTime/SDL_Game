@@ -55,8 +55,9 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
  m_bRunning = true;
  gameOver = true;
  Delay=200;
+TheTextureManager::Instance()->load("assets/block.png", "block", m_pRenderer);
  TheTextureManager::Instance()->load("assets/animate.png", "animate", m_pRenderer);
- TheTextureManager::Instance()->load("assets/animate.png", "apple", m_pRenderer);
+ TheTextureManager::Instance()->load("assets/apple.png", "apple", m_pRenderer);
  TTF_Init();
  gFont = TTF_OpenFont( "Raleway-Medium.ttf", 28 );
  apl.first=block_size*2;
@@ -68,8 +69,9 @@ void Game::render()
  SDL_RenderClear(m_pRenderer);
  SDL_Rect k; k.x=0; k.y=0; k.w=mWidth; k.h=mHeight;
  SDL_RenderCopy(m_pRenderer,str_to_texture("Score: "+std::to_string(score)),NULL,&k);
- for(int i=0;i<lengthofSnake;++i)
- TheTextureManager::Instance()->drawFrame("animate", Snake_block[i].first,Snake_block[i].second, block_size , block_size , 1, frame, m_pRenderer);
+ for(int i=0;i<lengthofSnake-1;++i)
+ TheTextureManager::Instance()->draw("block", Snake_block[i].first,Snake_block[i].second, block_size , block_size , m_pRenderer);
+ TheTextureManager::Instance()->drawFrame("animate", Snake_block[lengthofSnake-1].first,Snake_block[lengthofSnake-1].second, block_size , block_size , 1, frame, m_pRenderer, SDL_FLIP_NONE,angle);
  TheTextureManager::Instance()->draw("apple", apl.first,apl.second, block_size , block_size , m_pRenderer);
  SDL_RenderPresent(m_pRenderer);
 }
@@ -87,20 +89,31 @@ void Game::handleEvents()
         {
             switch(event.key.keysym.sym){
                 case SDLK_LEFT:
+                if(dirx!=block_size){
                 dirx=-block_size;
+                angle=180;}
                 diry=0;
                 break;
                 case SDLK_RIGHT:
+                if(dirx!=-block_size){
                 dirx=block_size;
+                angle=0;
+                }
                 diry=0;
                 break;
                 case SDLK_UP:
                 dirx=0;
+                if(diry!=block_size){
                 diry=-block_size;
+                angle=270;
+                }
                 break;
                 case SDLK_DOWN:
                 dirx=0;
+                if(diry!=-block_size){
                 diry=block_size;
+                angle=90;
+                }
                 break;
                 case SDLK_p:
                 gameOver=true;
@@ -123,12 +136,23 @@ void Game::clean()
 }
 void Game::update()
 {
- std::cout<<apl.first<<" "<<apl.second<<std::endl;
- frame=(int)(SDL_GetTicks())%3;
+ frame=(int)(3*SDL_GetTicks()/Delay)%3;
  if(SDL_GetTicks()>Mark+Delay){
  int a=Snake_block[0].first,b=Snake_block[0].second;
+ if(Snake_block[lengthofSnake-1].first+dirx>block_size*9){
+    Snake_block[lengthofSnake-1].first=0;
+ }
+ if(Snake_block[lengthofSnake-1].first+dirx<0){
+    Snake_block[lengthofSnake-1].first=block_size*9;
+ }
+ if(Snake_block[lengthofSnake-1].second+diry>block_size*9){
+    Snake_block[lengthofSnake-1].second=0;
+ }
+ if(Snake_block[lengthofSnake-1].second+diry<0){
+    Snake_block[lengthofSnake-1].second=block_size*9;
+ }
  if(Snake_block[lengthofSnake-1].first+dirx!=apl.first||Snake_block[lengthofSnake-1].second+diry!=apl.second){
-    for(int i=0;i<lengthofSnake-1;++i) Snake_block[i]=Snake_block[i+1];
+    for(int i=0;i<lengthofSnake-1;++i) {if(Snake_block[i]==Snake_block[lengthofSnake-1]){m_bRunning=false; break;}  Snake_block[i]=Snake_block[i+1];}
     Snake_block[lengthofSnake-1].first+=dirx;
     Snake_block[lengthofSnake-1].second+=diry;
  }
